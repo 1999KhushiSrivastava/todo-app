@@ -1,0 +1,49 @@
+### REST Client (VS Code "REST Client" extension / JetBrains HTTP Client)
+@host = http://localhost:4000
+
+### Health
+GET {{host}}/api/health
+
+### Create
+POST {{host}}/api/todos
+Content-Type: application/json
+
+{
+  "title": "Prepare Ziptrrip assignment",
+  "description": "Backend + frontend + docs",
+  "priority": "high",
+  "dueDate": "2026-12-31"
+}
+
+### List all
+GET {{host}}/api/todos
+
+### List with filters (status, q, priority, sort, order)
+GET {{host}}/api/todos?status=active&priority=high&sort=dueDate&order=asc&q=assignment
+
+### Get one
+GET {{host}}/api/todos/1
+
+### Update (partial)
+PATCH {{host}}/api/todos/1
+Content-Type: application/json
+
+{ "completed": true }
+
+### PUT behaves like PATCH
+PUT {{host}}/api/todos/1
+Content-Type: application/json
+
+{ "title": "Updated title", "priority": "low", "dueDate": null }
+
+### Delete one
+DELETE {{host}}/api/todos/1
+
+### Clear all completed
+DELETE {{host}}/api/todos?completed=true
+
+### Validation error example (400)
+POST {{host}}/api/todos
+Content-Type: application/json
+
+{ "title": "" }
